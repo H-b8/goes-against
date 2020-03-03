@@ -1,20 +1,26 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
-// The factSchema is used to embedded docs in as student doc.
-// There is no model and no 'facts' collection
-var linkSchema = new mongoose.Schema({
+const linkSchema = new mongoose.Schema({
   link: String,
   linktext: String
 }, {
   timestamps: true
 });
 
-var memberSchema = new mongoose.Schema({
+const subSchema = new mongoose.Schema({
+    email: {
+        type: String,
+        required: true
+    }
+})
+
+const memberSchema = new mongoose.Schema({
   name: String,
   email: String,
+  googleId: String,
   displayName: String,
   links: [linkSchema],
-  googleId: String
+  subscriptions: [subSchema]
 }, {
   timestamps: true
 });
