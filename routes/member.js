@@ -1,7 +1,6 @@
-var router = require('express').Router();
-var memberCtrl = require('../controllers/member');
+const router = require('express').Router();
+const memberCtrl = require('../controllers/member');
 
-// GET /students
 router.get('/', memberCtrl.index);
 
 router.post('/links', isLoggedIn, memberCtrl.addLink);
