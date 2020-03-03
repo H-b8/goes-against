@@ -14,26 +14,27 @@
 <div>
 <div>
 
-  <% members.forEach(function(member) { %>
+  <% member.forEach(function(m) { %>
     <div>
       <div>
         <div>
           <span>
-                      <img src="<%= member.avatar %>" class="circle responsive-img" width="50">
-                    <span><%= member.displayName %></span>
+                    <span><%= m.displayName %></span>
                   </span>
                 </div>
-                  <% member.links.forEach(function(link) { %>
-                    <p><a href="<%= link.link %>" target="_blank"><%= link.linktext %></a></p>
+                  <% m.links.forEach(function(l) { %>
+                    <p><a href="<%= l.link %>" target="_blank"><%= l.linktext %></a></p>
                   <% }) %>
 
-                <% if (member._id.equals(user && user._id)) { %>
-                   <form action="/members/links" method="POST">
+                <% if (m._id.equals(user && user._id)) { %>
+                   <form action="/member/links" method="POST">
                     <input type="text" name="linktext" value="TITLE">
                     <input type="text" name="link" value="URL">
                     <button type="submit" class="btn white-text">ADD LINK</button>
                   </form>
-                  <form action="/members/:id"></form>
+                  <form action="">
+
+                  </form>
                 <% } %>       
       </div>
     </div>

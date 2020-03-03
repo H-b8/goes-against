@@ -12,7 +12,6 @@ var linkSchema = new mongoose.Schema({
 var memberSchema = new mongoose.Schema({
   name: String,
   email: String,
-  avatar: String,
   displayName: String,
   links: [linkSchema],
   googleId: String
