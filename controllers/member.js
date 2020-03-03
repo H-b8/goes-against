@@ -7,10 +7,10 @@ module.exports = {
 };
 
 function index(req, res, next) {
-  Member.find({}, function(err, members) {
+  Member.find({}, function(err, member) {
     if (err) return next(err);
-    res.render('members/index', {
-      members,
+    res.render('member/index', {
+      member,
       name: req.query.name,
       user: req.user
     });
@@ -20,7 +20,7 @@ function index(req, res, next) {
 function addLink(req, res, next) {
   req.user.links.push(req.body);
   req.user.save(function(err) {
-    res.redirect('/members');
+    res.redirect('/member');
   });
 }
 
