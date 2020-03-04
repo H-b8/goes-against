@@ -10,29 +10,45 @@
     <% } else { %>
         <a href="/auth/google" id="log-deco">LOGIN</a>
     <% } %>
-    <br>
+    <br><br>
 <div>
 <div>
-
-  <% member.forEach(function(m) { %>
-    <span><%= m.displayName %></span>
-    <% m.links.forEach(function(l) { %>
-      <p><a href="<%= l.link %>" target="_blank"><%= l.linktext %></a></p>
+    <h3><%= member.displayName %></h3>
+    <% member.links.forEach(function(l) { %>
+      <p>
+        <a href="http://<%= l.link %>" target="_blank"><%= l.linktext %></a>
+        <% if (member._id.equals(user && user._id)) { %>
+          (EDIT)
+        <% } %>
+        </p>
     <% }) %>
+    <h3>SUBSCRIBE</h3>
+    <form action="/member/<%= member._id %>/subscriptions" method="POST">
+      <input type="text" name="subEmail" value="EMAIL" autocomplete="off">
+      <button type="submit">SUBMIT</button>
+    </form>
 
-    <% if (m._id.equals(user && user._id)) { %>
+    <br>
+
+    <% if (member._id.equals(user && user._id)) { %>
+      <h3>SETTINGS</h3>
       <form action="/member/links" method="POST">
-        <input type="text" name="linktext" value="TITLE">
-        <input type="text" name="link" value="URL">
-        <button type="submit" class="btn white-text">ADD LINK</button>
+        <input type="text" name="linktext" value="TITLE" autocomplete="off">
+        <input type="text" name="link" value="URL" autocomplete="off">
+        <button type="submit">ADD NEW LINK</button>
       </form>
-      <form action="">
+      <br>
+      <br>
+      <form action="/member/<%= member._id %>/update" method="POST">
+        <input type="text" name="displayName" value="<%= member.displayName %>">
+        <button type="submit">CHANGE DISPLAY NAME</button>
+      </form>
+      <br>
+      <a href="/member/<%= member._id %>/viewsubs">VIEW SUBSCRIBERS</a>
+    <% } %> 
 
-      </form>
-  <% } %>       
-<% }) %>
+    
 </div>
 </div>
-
 </body>
 </html>

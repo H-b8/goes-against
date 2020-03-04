@@ -10,13 +10,24 @@ router.get('/auth/google', passport.authenticate(
   { scope: ['profile', 'email'] }
 ));
 
-router.get('/oauth2callback', passport.authenticate(
-  'google',
-  {
-    successRedirect: '/member', // should go to member profile
-    failureRedirect: '/login'
-  }
-));
+router.get('/oauth2callback', function(req, res, next) {
+  passport.authenticate(
+    'google',
+    function(err, user) {
+      if (err) {
+        return next(err)
+      }
+      if (!user) {
+        return res.redirect('/login');
+      }
+      req.logIn(user, function(err) {
+        if (err) {
+          return next(err);
+        }
+        return res.redirect(`member/${user._id}`);
+      })
+    })(req, res, next);
+});
 
 router.get('/logout', function(req, res) {
   req.logout();
