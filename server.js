@@ -15,7 +15,7 @@ require('./config/passport');
 
 var indexRouter = require('./routes/index');
 var loginRouter = require('./routes/login');
-var memberRouter = require('./routes/member.js');
+var memberRouter = require('./routes/member');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

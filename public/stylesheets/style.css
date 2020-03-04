@@ -11,3 +11,7 @@ body {
 #log-deco {
   text-decoration: none;
 }
+
+h3 {
+  text-transform: uppercase;
+}

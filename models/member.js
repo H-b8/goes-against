@@ -8,7 +8,7 @@ const linkSchema = new mongoose.Schema({
 });
 
 const subSchema = new mongoose.Schema({
-    email: {
+    subEmail: {
         type: String,
         required: true
     }
@@ -18,7 +18,10 @@ const memberSchema = new mongoose.Schema({
   name: String,
   email: String,
   googleId: String,
-  displayName: String,
+  displayName: {
+    type: String,
+    default: 'USERNAME'
+  },
   links: [linkSchema],
   subscriptions: [subSchema]
 }, {
