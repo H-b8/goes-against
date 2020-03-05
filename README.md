@@ -14,7 +14,7 @@ MongoDB, Mongoose, Express, Node.JS, EJS, HTML, CSS, Vanilla JavaScript, Heroku,
 
 ### PLANNING
 
-[https://www.notion.so/e1c603032a82417f92478fd46d0ac924?v=29fecde46b304d139ab39e9cc6511e83]
+[NOTION](https://www.notion.so/e1c603032a82417f92478fd46d0ac924?v=29fecde46b304d139ab39e9cc6511e83)
 
 ### ICE BOX
 
