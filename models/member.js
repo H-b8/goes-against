@@ -12,6 +12,10 @@ const linkSchema = new mongoose.Schema({
   subtext: {
     type: String,
     default: 'SUBTEXT'
+  },
+  star: {
+    type: Boolean,
+    default: false
   }
 }, {
   timestamps: true

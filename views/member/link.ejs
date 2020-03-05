@@ -15,6 +15,7 @@
             <input type="text" name="linktext"  autocomplete="off" value="<%= link.linktext %>">
             <input type="text" name="link" value="<%= link.link %>" autocomplete="off">
             <input type="text" name="subtext" value=" <%= link.subtext %>" autocomplete="off">
+            <input type="checkbox" name="star" <%= link.star ? 'checked' : '' %> >
             <button type="submit">UPDATE LINK</button>
             <br><br>
         </form>

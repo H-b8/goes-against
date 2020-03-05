@@ -10,7 +10,7 @@
     <h3><%= member.username %> (<%= member.location %>)</h3>
     <% member.links.forEach(function(l) { %>
       <p>
-        ☆ <a href="<%= l.link %>" target="_blank" id="link-deco"><%= l.linktext %></a>
+        ☆ <a href="<%= l.link %>" id="link-text" target="_blank"><%= l.linktext %></a>
         <span id="small">(<%= l.subtext %>)</span>
         <% if (member._id.equals(user && user._id)) { %>
           <span id="small">(<a href="/member/<%= member._id %>/links/<%= l._id %>" id="small">EDIT</a>)</span>
@@ -43,12 +43,12 @@
         <button type="submit">CHANGE LOCATION</button>
       </form>
       <br>
-      <a href="/member/<%= member._id %>/subscribers" id="link-deco">VIEW SUBSCRIBERS</a>
+      <a href="/member/<%= member._id %>/subscribers">VIEW SUBSCRIBERS</a>
       <br><br>
       <% if (user) { %>
-        <a href="/logout" id="link-deco">LOGOUT</a>
+        <a href="/logout">LOGOUT</a>
       <% } else { %>
-        <a href="/auth/google" id="link-deco">LOGIN</a>
+        <a href="/auth/google">LOGIN</a>
       <% } %>
     <% } %> 
 

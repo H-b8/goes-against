@@ -48,8 +48,6 @@ function showLink(req, res) {
 }
 
 function editLink(req, res) {
-  console.log("hiiiiiiiii")
-
   Member.findById(req.params.mid, function(err, member) {
     const newLink = member.links.id(req.params.lid)
     for (let prop in req.body) {

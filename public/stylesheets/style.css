@@ -3,12 +3,17 @@ body {
   font: 14px;
 }
 
-/* a {
-  color: #00B7FF;
-} */
-
-#link-deco {
+a {
+  color: black;
   text-decoration: none;
+}
+
+#link-text {
+  color: blue;
+}
+
+#enter-link {
+  color: red;
 }
 
 #small {
