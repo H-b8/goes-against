@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GOES AGAINST</title>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+</head>
+<body>
+    <a href="/member/<%= member._id %>">BACK</a>
+    <br>
+    <%  if (member._id.equals(user && user._id)) { %>
+        <h3>EDIT LINK</h3>
+        <form action="/member/<%= member._id %>/links/<%= link._id %>/update" method="POST">
+            <input type="text" name="linktext"  autocomplete="off" value="<%= link.linktext %>">
+            <input type="text" name="link" value="<%= link.link %>" autocomplete="off">
+            <input type="text" name="subtext" value=" <%= link.subtext %>" autocomplete="off">
+            <button type="submit">UPDATE LINK</button>
+            <br><br>
+        </form>
+        <form action="/member/<%= member._id %>/links/<%= link._id %>?_method=DELETE" method="POST">
+            <input type="submit" value="DELETE LINK">
+        </form>
+    <% } %>
+</body>
+</html>

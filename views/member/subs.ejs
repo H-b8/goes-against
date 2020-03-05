@@ -4,14 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GOES AGAINST</title>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
 </head>
 <body>
+  <a href="/member/<%= member._id %>">BACK</a>
   <% if (member._id.equals(user && user._id)) { %>
     <h3>SUBSCRIBERS</h3>
     <% member.subscriptions.forEach(function(s) { %>
       <p>
-        <form action="" method="POST">
-        <button type="submit">X</button>
+        <form action="/member/<%= member._id %>/subscribers/<%= s._id%>?_method=DELETE" method="POST">
+        <input type="submit" value="X">
         <%= s.subEmail %>
         </form>
       </p>
