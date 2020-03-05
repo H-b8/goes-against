@@ -1,26 +1,42 @@
 const mongoose = require('mongoose');
 
 const linkSchema = new mongoose.Schema({
-  link: String,
-  linktext: String
+  link: {
+    type: String,
+    required: true
+  },
+  linktext: {
+    type: String,
+    required: true
+  },
+  subtext: {
+    type: String,
+    default: 'SUBTEXT'
+  }
 }, {
   timestamps: true
 });
 
 const subSchema = new mongoose.Schema({
-    subEmail: {
-        type: String,
-        required: true
-    }
-})
+  subEmail: {
+    type: String,
+    required: true
+  }
+}, {
+  timestamps: true
+});
 
 const memberSchema = new mongoose.Schema({
   name: String,
   email: String,
   googleId: String,
-  displayName: {
+  username: {
     type: String,
-    default: 'USERNAME'
+    default: 'username'
+  },
+  location: {
+    type: String,
+    default: 'location'
   },
   links: [linkSchema],
   subscriptions: [subSchema]
