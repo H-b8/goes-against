@@ -16,7 +16,7 @@ PLANNING VIA [NOTION](https://www.notion.so/e1c603032a82417f92478fd46d0ac924?v=2
 
 ### ICE BOX
 
-- Implement usernames in URL format
+- Connect domain and implement custom usernames to create URL format of goesagainst.club/member/username
 - Implement a feature to export mailing list
 - Create automated email alert from the site so that members no longer need to contact their fanbase on their own
 
