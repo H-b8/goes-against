@@ -6,7 +6,7 @@ Goes Against is an inclusive, zero censorship, platform that allows its members 
 
 Designed with comic relief in mind, this web application takes a minimalist approach in adopting the appearance of Craigslist Personals. A space taken down by the same force causing mass deletion across social media platforms, FOSTA/SESTA. 
 
-** This app is built specifically to be accessed through a social media link and viewed on a phone screen
+** This app is built specifically to be accessed through a social media link and viewed on a phone screen. "Zero cencorship" is stated as opposed to popular social media and link hosting websites who do not allow adult links.
 
 <img src="/public/images/GOESAGAINST.png" width="500">
 
