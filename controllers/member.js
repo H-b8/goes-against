@@ -2,14 +2,14 @@ const Member = require('../models/member');
 
 module.exports = {
   profile,
+  editMember,
   addLink,
   showLink,
   editLink,
   delLink,
   addSub,
   viewSubs,
-  deleteSub,
-  editMember
+  deleteSub
 };
 
 function profile(req, res, next) {
@@ -20,6 +20,12 @@ function profile(req, res, next) {
       user: req.user
     });
   });
+}
+
+function editMember(req, res) {
+  Member.findByIdAndUpdate(req.params.id, req.body, function(err) {
+    res.redirect(`/member/${req.params.id}`);
+  })
 }
 
 function addLink(req, res, next) {
@@ -60,7 +66,6 @@ function editLink(req, res) {
 }
 
 function delLink(req, res, next) {
-  
   Member.findById(req.params.mid, function(err, member) {
     let x = member.links.id(req.params.lid)
     x.remove();
@@ -96,10 +101,4 @@ function deleteSub(req, res, next) {
       res.redirect(`/member/${req.params.mid}/subscribers`);
     });
   });
-}
-
-function editMember(req, res) {
-  Member.findByIdAndUpdate(req.params.id, req.body, function(err) {
-    res.redirect(`/member/${req.params.id}`);
-  })
 }
