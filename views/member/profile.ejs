@@ -1,59 +1,62 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>GOES AGAINST</title>
-    <link rel='stylesheet' href='/stylesheets/style.css'/>
-  </head>
-  <body>
-<div>
-<div>
-    <h3><%= member.username %> (<%= member.location %>)</h3>
-    <% member.links.forEach(function(l) { %>
-      <p>
-        ☆ <a href="<%= l.link %>" id="link-text" target="_blank"><%= l.linktext %></a>
-        <span id="small">(<%= l.subtext %>)</span>
-        <% if (member._id.equals(user && user._id)) { %>
-          <span id="small">(<a href="/member/<%= member._id %>/links/<%= l._id %>" id="small">EDIT</a>)</span>
-        <% } %>
-      </p>
-    <% }) %>
-    <h3>SUBSCRIBE</h3>
-    <form action="/member/<%= member._id %>/addsub" method="POST">
-      <input type="text" name="subEmail" value="EMAIL ADDRESS" autocomplete="off">
-      <button type="submit">SUBMIT</button>
-    </form>
-    <br>
-    <hr>
 
-    <% if (member._id.equals(user && user._id)) { %>
-      <h3>MEMBER SETTINGS</h3>
-      <form action="/member/links" method="POST">
-        <input type="text" name="linktext" value="TITLE" autocomplete="off">
-        <input type="text" name="link" value="URL" autocomplete="off">
-        <button type="submit">ADD NEW LINK</button>
-      </form>
-      <br>
-      <form action="/member/<%= member._id %>/update" method="POST">
-        <input type="text" name="username" value="<%= member.username %>" autocomplete="off">
-        <button type="submit">CHANGE USERNAME</button>
-      </form>
-      <br>
-      <form action="/member/<%= member._id %>/update" method="POST">
-        <input type="text" name="location" value="<%= member.location %>" autocomplete="off">
-        <button type="submit">CHANGE LOCATION</button>
-      </form>
-      <br>
-      <a href="/member/<%= member._id %>/subscribers">VIEW SUBSCRIBERS</a>
-      <br><br>
-      <% if (user) { %>
-        <a href="/logout">LOGOUT</a>
-      <% } else { %>
-        <a href="/auth/google">LOGIN</a>
-      <% } %>
-    <% } %> 
+<head>
+	<title>GOES AGAINST</title>
+	<link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
 
-    
-</div>
-</div>
+<body>
+	<div>
+		<div>
+			<h3><%= member.username %> (<%= member.location %>)</h3>
+			<% member.links.forEach(function(l) { %>
+			<p>
+				☆ <a href="<%= l.link %>" id="link-text" target="_blank"><%= l.linktext %></a>
+				<span id="small">(<%= l.subtext %>)</span>
+				<% if (member._id.equals(user && user._id)) { %>
+				<span id="small">(<a href="/member/<%= member._id %>/links/<%= l._id %>" id="small">EDIT</a>)</span>
+				<% } %>
+			</p>
+			<% }) %>
+			<h3>SUBSCRIBE</h3>
+			<form action="/member/<%= member._id %>/addsub" method="POST">
+				<input type="text" name="subEmail" value="EMAIL ADDRESS" autocomplete="off">
+				<button type="submit">SUBMIT</button>
+			</form>
+			<br>
+			<hr>
+
+			<% if (member._id.equals(user && user._id)) { %>
+			<h3>MEMBER SETTINGS</h3>
+			<form action="/member/links" method="POST">
+				<input type="text" name="linktext" value="TITLE" autocomplete="off">
+				<input type="text" name="link" value="URL" autocomplete="off">
+				<button type="submit">ADD NEW LINK</button>
+			</form>
+			<br>
+			<form action="/member/<%= member._id %>/update" method="POST">
+				<input type="text" name="username" value="<%= member.username %>" autocomplete="off">
+				<button type="submit">CHANGE USERNAME</button>
+			</form>
+			<br>
+			<form action="/member/<%= member._id %>/update" method="POST">
+				<input type="text" name="location" value="<%= member.location %>" autocomplete="off">
+				<button type="submit">CHANGE LOCATION</button>
+			</form>
+			<br>
+			<a href="/member/<%= member._id %>/subscribers">VIEW SUBSCRIBERS</a>
+			<br><br>
+			<% if (user) { %>
+			<a href="/logout">LOGOUT</a>
+			<% } else { %>
+			<a href="/auth/google">LOGIN</a>
+			<% } %>
+			<% } %>
+
+
+		</div>
+	</div>
 </body>
+
 </html>
