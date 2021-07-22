@@ -13,7 +13,6 @@ module.exports = {
 };
 
 function profile(req, res, next) {
-	console.log("this is req in profile!!!!", req)
 	Member.findById(req.params.id, function (err, member) {
 		if (err) return next(err);
 		res.render('member/profile', {
@@ -37,7 +36,6 @@ function addLink(req, res, next) {
 }
 
 function showLink(req, res) {
-	console.log("show linkeejenfjs")
 	Member.findOne({ 'links._id': req.params.lid }, function (err, member) {
 		const linkIdFromParams = req.params.lid;
 		let link;
@@ -86,7 +84,6 @@ function addSub(req, res, next) {
 }
 
 function viewSubs(req, res) {
-	console.log("view subbdhsnfms")
 	Member.findById(req.params.id, function (err, member) {
 		res.render('member/subs', {
 			member,
