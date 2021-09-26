@@ -7,24 +7,28 @@
     <link rel='stylesheet' href='/stylesheets/style.css'/>
 </head>
 <body>
-    <h3>GOES AGAINST</h3>
+    <h2>GOES AGAINST</h2>
+
     <p>
         A tool to keep artists, sex workers, and marginalized people (whose existence <i>goes against</i> 
         popular social media's vague community guidelines) in contact 
         with their community and sources of income.
     </p>
+
     <p>
-        Goes Against is an inclusive, zero censorship, platform that allows its members to create a "link in bio" 
-        which will display links to any other websites or social media platforms where they can be found.
-        But more importantly, it implements a mailing list feature that a member may not have had access to
+        Goes Against is an inclusive, zero censorship, platform that allows its members to create a "link in bio" site,
+        which will display links to <i>any</i> other websites or social media platforms where they can be found.
+        But more importantly, it implements a mailing list feature that a member may not have access to
         if they do not have a personal website. With this feature, any visitor can sign up to receieve updates from a member 
         in the event that they are deplatformed.
     </p>
+
     <% if (user) { %>
+        <a href="/member/<%= user._id %>">DASHBOARD</a>
+        <br><br>
         <a href="/logout">LOGOUT</a>
     <% } else { %>
         <a href="/auth/google">CLICK TO ENTER</a>
     <% } %>
-    <br>
 </body>
 </html>
