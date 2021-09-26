@@ -8,7 +8,7 @@ mongoose.connect(process.env.DATABASE_URL, {
 
 // database connection event
 mongoose.connection.on('connected', function () {
-  console.log(`Mongoose connected to: ${process.env.DATABASE_URL}`);
+  console.log(`Mongoose Connected`);
 });
 
 module.exports = mongoose;
