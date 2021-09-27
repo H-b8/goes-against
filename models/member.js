@@ -42,6 +42,10 @@ const memberSchema = new mongoose.Schema({
 		type: String,
 		default: 'location'
 	},
+	photo: {
+		type: String,
+		default: ''
+	},
 	links: [linkSchema],
 	subscriptions: [subSchema]
 }, {
