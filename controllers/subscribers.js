@@ -8,16 +8,18 @@ module.exports = {
 };
 
 async function addSub(req, res) {
+    console.log(req.user)
     const member = await Member.findById(req.params.memberID);
     req.body.subscribedTo = member;
-    const subscription = await Subscriber.create(req.body);
+    const newSub = await Subscriber.create(req.body);
     
     res.render('member/profile', {
         member,
+        newSub,
         user: req.user
     });
 
-    // res.status(201).json(subscription);
+    // res.status(201).json(newSub);
 };
 
 async function viewSubs(req, res) {
@@ -37,12 +39,11 @@ async function viewSubs(req, res) {
 async function deleteSub(req, res) {
     console.log(req.params.subID)
     const sub = await Subscriber.findById(req.params.subID);
-    console.log(sub)
-    // 
-    // const deletedSub = await Subscription.findByIdAndRemove(req.params.subID);
+    const deletedSub = await Subscription.findByIdAndRemove(req.params.subID);
     const member = Member.findById(sub.subscribedTo, function (err, member) {
         res.render('member/subs', {
             member,
+            deletedSub,
             user: req.user
         })
     });
