@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { v4 } = require('uuid');
 
 const linkSchema = new mongoose.Schema({
 	link: {
@@ -25,6 +26,10 @@ const subSchema = new mongoose.Schema({
 	subEmail: {
 		type: String,
 		required: true
+	},
+	subscribedTo: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'Member'
 	}
 }, {
 	timestamps: true
@@ -36,11 +41,12 @@ const memberSchema = new mongoose.Schema({
 	googleId: String,
 	username: {
 		type: String,
-		default: 'username'
+		default: v4().substring(0, 7),
+		unique: true
 	},
 	location: {
 		type: String,
-		default: 'location'
+		default: ''
 	},
 	photo: {
 		type: String,

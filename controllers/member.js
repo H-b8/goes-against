@@ -1,4 +1,5 @@
 const Member = require('../models/member');
+const Subscriber = require('../models/subscriber');
 
 module.exports = {
 	profile,
@@ -74,13 +75,20 @@ function delLink(req, res, next) {
 	});
 }
 
-function addSub(req, res, next) {
-	Member.findById(req.params.id, function (err, member) {
-		member.subscriptions.push(req.body);
-		member.save(function (err) {
-			res.redirect(`/member/${member._id}`);
-		})
-	})
+async function addSub(req, res, next) {
+	// Member.findById(req.params.id, function (err, member) {
+	// 	member.subscriptions.push(req.body);
+	// 	member.save(function (err) {
+	// 		res.redirect(`/member/${member._id}`);
+	// 	})
+	// });
+	console.log('hitting add in ctrl')
+	member = await Member.findById(req.params.id);
+	req.body.subscribedTo = member;
+	// console.log(req.body)
+	subscription = await Subscriber.create(req.body);
+	console.log(subscription)
+	res.status(201).json(subscription);
 }
 
 function viewSubs(req, res) {

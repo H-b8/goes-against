@@ -10,6 +10,7 @@ router.post('/:mid/links/:lid/update', isLoggedIn, memberCtrl.editLink);
 router.delete('/:mid/links/:lid', isLoggedIn, memberCtrl.delLink);
 
 router.post('/:id/addsub', memberCtrl.addSub);
+// router.post('/:id/addsub', () => console.log('hitting add'));
 router.get('/:id/subscribers', isLoggedIn, memberCtrl.viewSubs);
 router.delete('/:mid/subscribers/:sid', isLoggedIn, memberCtrl.deleteSub);
 
