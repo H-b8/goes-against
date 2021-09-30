@@ -1,28 +1,27 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-// var logger = require('morgan');
-var cookieParser = require('cookie-parser');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const passport = require('passport');
 const methodOverride = require('method-override')
 
 require('dotenv').config();
 
-var app = express();
+const app = express();
 
 require('./config/database');
 require('./config/passport');
 
-var indexRouter = require('./routes/index');
-var loginRouter = require('./routes/login');
-var memberRouter = require('./routes/member');
+const indexRouter = require('./routes/index');
+const loginRouter = require('./routes/login');
+const memberRouter = require('./routes/member');
+const subsRouter = require('./routes/subscribers');
 
 // VIEW ENGINE SETUP
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-// app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -40,6 +39,7 @@ app.use(passport.session());
 app.use('/', indexRouter);
 app.use('/login', loginRouter);
 app.use('/member', memberRouter);
+app.use('/subs', subsRouter);
 
 // CATCH ERROR AND PASS TO HANDLER
 app.use(function(req, res, next) {

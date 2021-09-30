@@ -5,8 +5,8 @@ mongoose.connect(process.env.DATABASE_URL, {
   useUnifiedTopology: true,
   useCreateIndex: true
 });
-
-// database connection event
+  
+// DB CONNECTION EVENT
 mongoose.connection.on('connected', function () {
   console.log(`Mongoose Connected`);
 });

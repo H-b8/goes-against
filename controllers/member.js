@@ -7,10 +7,7 @@ module.exports = {
 	addLink,
 	showLink,
 	editLink,
-	delLink,
-	addSub,
-	viewSubs,
-	deleteSub
+	delLink
 };
 
 function profile(req, res, next) {
@@ -75,37 +72,28 @@ function delLink(req, res, next) {
 	});
 }
 
-async function addSub(req, res, next) {
-	// Member.findById(req.params.id, function (err, member) {
-	// 	member.subscriptions.push(req.body);
-	// 	member.save(function (err) {
-	// 		res.redirect(`/member/${member._id}`);
-	// 	})
-	// });
-	console.log('hitting add in ctrl')
-	member = await Member.findById(req.params.id);
-	req.body.subscribedTo = member;
-	// console.log(req.body)
-	subscription = await Subscriber.create(req.body);
-	console.log(subscription)
-	res.status(201).json(subscription);
-}
+// async function addSub(req, res, next) {
+// 	member = await Member.findById(req.params.id);
+// 	req.body.subscribedTo = member;
+// 	subscription = await Subscriber.create(req.body);
+// 	res.status(201).json(subscription);
+// }
 
-function viewSubs(req, res) {
-	Member.findById(req.params.id, function (err, member) {
-		res.render('member/subs', {
-			member,
-			user: req.user
-		})
-	});
-}
+// function viewSubs(req, res) {
+// 	Member.findById(req.params.id, function (err, member) {
+// 		res.render('member/subs', {
+// 			member,
+// 			user: req.user
+// 		})
+// 	});
+// }
 
-function deleteSub(req, res, next) {
-	Member.findById(req.params.mid, function (err, member) {
-		let x = member.subscriptions.id(req.params.sid)
-		x.remove();
-		member.save(function (err) {
-			res.redirect(`/member/${req.params.mid}/subscribers`);
-		});
-	});
-}
+// function deleteSub(req, res, next) {
+// 	Member.findById(req.params.mid, function (err, member) {
+// 		let x = member.subscriptions.id(req.params.sid)
+// 		x.remove();
+// 		member.save(function (err) {
+// 			res.redirect(`/member/${req.params.mid}/subscribers`);
+// 		});
+// 	});
+// }
