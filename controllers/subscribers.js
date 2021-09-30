@@ -11,7 +11,13 @@ async function addSub(req, res) {
     const member = await Member.findById(req.params.memberID);
     req.body.subscribedTo = member;
     const subscription = await Subscriber.create(req.body);
-    res.status(201).json(subscription);
+    
+    res.render('member/profile', {
+        member,
+        user: req.user
+    });
+
+    // res.status(201).json(subscription);
 };
 
 async function viewSubs(req, res) {

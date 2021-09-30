@@ -24,7 +24,7 @@
 			<% }) %>
 		
 			<h3>SUBSCRIBE</h3>
-			<form action="/member/<%= member._id %>/addsub" method="POST">
+			<form action="/subs/<%= member._id %>" method="POST">
 				<input type="text" name="subEmail" placeholder="enter email" autocomplete="off">
 				<button type="submit">SUBMIT</button>
 			</form>
