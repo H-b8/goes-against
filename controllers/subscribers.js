@@ -19,12 +19,7 @@ async function viewSubs(req, res) {
     res.status(200).json(subs)
 }
 
-function deleteSub(req, res, next) {
-	Member.findById(req.params.mid, function (err, member) {
-		let x = member.subscriptions.id(req.params.sid)
-		x.remove();
-		member.save(function (err) {
-			res.redirect(`/member/${req.params.mid}/subscribers`);
-		});
-	});
+async function deleteSub(req, res) {
+    const deletedSub = await Subscription.findByIdAndRemove(req.params.subID);
+    res.status(200).json(deletedSub);
 }
