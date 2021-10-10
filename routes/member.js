@@ -9,10 +9,6 @@ router.get('/:mid/links/:lid', isLoggedIn, memberCtrl.showLink);
 router.post('/:mid/links/:lid/update', isLoggedIn, memberCtrl.editLink);
 router.delete('/:mid/links/:lid', isLoggedIn, memberCtrl.delLink);
 
-// router.post('/:id/addsub', memberCtrl.addSub);
-// router.get('/:id/subscribers', isLoggedIn, memberCtrl.viewSubs);
-// router.delete('/:mid/subscribers/:sid', isLoggedIn, memberCtrl.deleteSub);
-
 function isLoggedIn(req, res, next) {
   if ( req.isAuthenticated() ) return next();
   res.redirect('/auth/google');

@@ -10,9 +10,9 @@ module.exports = {
 async function addSub(req, res) {
     console.log(req.user)
     const member = await Member.findById(req.params.memberID);
-    req.body.subscribedTo = member;
+    req.body.subscribedTo = req.params.memberID;
     const newSub = await Subscriber.create(req.body);
-    
+
     res.render('member/profile', {
         member,
         newSub,
@@ -22,6 +22,7 @@ async function addSub(req, res) {
     // res.status(201).json(newSub);
 };
 
+// VIEW ALL SUBS
 async function viewSubs(req, res) {
     const subs = await Subscriber.find({ subscribedTo: req.params.memberID });
 
@@ -37,17 +38,17 @@ async function viewSubs(req, res) {
 };
 
 async function deleteSub(req, res) {
-    console.log(req.params.subID)
-    const sub = await Subscriber.findById(req.params.subID);
-    const deletedSub = await Subscription.findByIdAndRemove(req.params.subID);
-    const member = Member.findById(sub.subscribedTo, function (err, member) {
-        res.render('member/subs', {
-            member,
-            deletedSub,
-            user: req.user
-        })
+    const subToDelete = await Subscriber.findById(req.params.subID);
+    const member = await Member.findById(subToDelete.subscribedTo);
+    const deletedSub = await Subscriber.findByIdAndRemove({ _id: req.params.subID }, { useFindAndModify: false });
+    const subs = await Subscriber.find({ subscribedTo: member._id });
+
+    res.render('member/subs', {
+        member,
+        subs,
+        deletedSub,
+        user: req.user
     });
 
-    console.log(member)
-    // res.status(200).json(deletedSub);
+    // res.status(200).json(subs);
 };
