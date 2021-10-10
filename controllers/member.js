@@ -10,6 +10,7 @@ module.exports = {
 	delLink
 };
 
+// SHOW PROFILE
 function profile(req, res, next) {
 	Member.findById(req.params.id, function (err, member) {
 		if (err) return next(err);
@@ -20,6 +21,7 @@ function profile(req, res, next) {
 	});
 }
 
+// EDIT PROFILE
 function editMember(req, res) {
 	Member.findByIdAndUpdate(req.params.id, req.body, function (err) {
 		res.redirect(`/member/${req.params.id}`);
@@ -33,6 +35,7 @@ function addLink(req, res, next) {
 	});
 }
 
+// ?????
 function showLink(req, res) {
 	Member.findOne({ 'links._id': req.params.lid }, function (err, member) {
 		const linkIdFromParams = req.params.lid;
@@ -71,29 +74,3 @@ function delLink(req, res, next) {
 		});
 	});
 }
-
-// async function addSub(req, res, next) {
-// 	member = await Member.findById(req.params.id);
-// 	req.body.subscribedTo = member;
-// 	subscription = await Subscriber.create(req.body);
-// 	res.status(201).json(subscription);
-// }
-
-// function viewSubs(req, res) {
-// 	Member.findById(req.params.id, function (err, member) {
-// 		res.render('member/subs', {
-// 			member,
-// 			user: req.user
-// 		})
-// 	});
-// }
-
-// function deleteSub(req, res, next) {
-// 	Member.findById(req.params.mid, function (err, member) {
-// 		let x = member.subscriptions.id(req.params.sid)
-// 		x.remove();
-// 		member.save(function (err) {
-// 			res.redirect(`/member/${req.params.mid}/subscribers`);
-// 		});
-// 	});
-// }

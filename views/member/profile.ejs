@@ -53,12 +53,20 @@
 		</form>
 		<br>
 		<form action="/member/<%= member._id %>/update" method="POST">
+			<input type="text" name="photo" value="<%= member.photo %>" autocomplete="off">
+			<button type="submit">CHANGE PROFILE PHOTO</button>
+		</form>
+		<br>
+		<form action="/member/<%= member._id %>/update" method="POST">
 			<input type="text" name="location" value="<%= member.location %>" autocomplete="off">
 			<button type="submit">CHANGE LOCATION</button>
 		</form>
 		<br>
+
 		<a href="/subs/<%= member._id %>">VIEW SUBSCRIBERS</a>
+		
 		<br><br>
+
 		<% if (user) { %>
 			<a href="/logout">LOGOUT</a>
 		<% } else { %>

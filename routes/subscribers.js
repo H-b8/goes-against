@@ -9,7 +9,6 @@ router.post('/:memberID', subsCtrl.addSub);
 // BUT ONLY A LOGGED IN USER MAY VIEW AND DELETE FROM THEIR SUBSCRIBERS LIST
 router.get('/:memberID', isLoggedIn, subsCtrl.viewSubs);
 router.delete('/:subID', isLoggedIn, subsCtrl.deleteSub);
-// router.delete('/:subID', subsCtrl.deleteSub);
 
 function isLoggedIn(req, res, next) {
   if ( req.isAuthenticated() ) return next();
