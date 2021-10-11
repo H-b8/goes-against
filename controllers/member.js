@@ -23,10 +23,12 @@ function profile(req, res, next) {
 
 // EDIT PROFILE
 function editMember(req, res) {
+	// if username being updated look for username
+	// if already exists, send error
 	Member.findByIdAndUpdate(req.params.id, req.body, function (err) {
 		res.redirect(`/member/${req.params.id}`);
-	})
-}
+	});
+};
 
 function addLink(req, res, next) {
 	req.user.links.push(req.body);

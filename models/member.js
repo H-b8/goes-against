@@ -22,19 +22,6 @@ const linkSchema = new mongoose.Schema({
 	timestamps: true
 });
 
-const subSchema = new mongoose.Schema({
-	subEmail: {
-		type: String,
-		required: true
-	},
-	subscribedTo: {
-		type: mongoose.Schema.Types.ObjectId,
-		ref: 'Member'
-	}
-}, {
-	timestamps: true
-});
-
 const memberSchema = new mongoose.Schema({
 	name: String,
 	email: String,
@@ -52,8 +39,7 @@ const memberSchema = new mongoose.Schema({
 		type: String,
 		default: ''
 	},
-	links: [linkSchema],
-	subscriptions: [subSchema]
+	links: [linkSchema]
 }, {
 	timestamps: true
 });
