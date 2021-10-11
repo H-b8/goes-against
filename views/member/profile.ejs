@@ -2,20 +2,33 @@
 <html>
 
 <head>
-	<title>
-		<%= member.username %> | GOES AGAINST
-	</title>
+	<title><%= member.username %> | GOES AGAINST</title>
 	<link rel='stylesheet' href='/stylesheets/style.css' />
 	<script>document.title = document.title.toUpperCase();</script>
 </head>
 
 <body>
-	<h1>
-		<%= member.username %>
-		<% if (member.location.length) { %>
-			<span>(<%= member.location %>)</span>
-		<% } %>
-	</h1>
+	<header>
+		<h1>
+			<%= member.username %>
+			<% if (member.location.length) { %>
+				<span>(<%= member.location %>)</span>
+			<% } %>
+		</h1>
+
+		<nav>
+			<% if (member._id.equals(user && user._id)) { %>
+				<a href="">SETTINGS</a> |
+				<a href="/subs/<%= member._id %>">SUBSCRIBERS</a> |
+			<% } %>
+
+			<% if (user && user._id) { %>
+				<a href="/logout">LOGOUT</a>
+			<% } else { %>
+				<a href="/login">LOGIN</a>
+			<% } %>
+		</nav>
+	</header>
 
 	<div class="profile-container">
 		<div class="links-container">
@@ -71,16 +84,7 @@
 			<input type="text" name="location" value="<%= member.location %>" autocomplete="off">
 			<button type="submit">CHANGE LOCATION</button>
 		</form>
-		<br>
-
-		<a href="/subs/<%= member._id %>">VIEW SUBSCRIBERS</a>
-
-		<br><br>
-
-		<% if (member._id.equals(user && user._id)) { %>
-			<a href="/logout">LOGOUT</a>
-			<% } %>
-				<% } %>
+	<% } %>
 </body>
 
 </html>

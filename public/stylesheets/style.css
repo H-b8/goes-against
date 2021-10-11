@@ -7,6 +7,12 @@ body {
 	font-size: min(1rem, 3.5vw);
 }
 
+header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
 h1, h3 {
 	text-transform: capitalize;
 }
