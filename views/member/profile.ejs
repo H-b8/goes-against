@@ -2,34 +2,44 @@
 <html>
 
 <head>
-	<title><%= member.username %> | GOES AGAINST</title>
+	<title>
+		<%= member.username %> | GOES AGAINST
+	</title>
 	<link rel='stylesheet' href='/stylesheets/style.css' />
 	<script>document.title = document.title.toUpperCase();</script>
 </head>
 
 <body>
-	<h1><%= member.username %> (<%= member.location %>)</h1>
+	<h1>
+		<%= member.username %>
+		<% if (member.location.length) { %>
+			<span>(<%= member.location %>)</span>
+		<% } %>
+	</h1>
 
 	<div class="profile-container">
 		<div class="links-container">
 			<% member.links.forEach(function(l) { %>
 				<p>
-					☆ <a href="<%= l.link %>" id="link-text" target="_blank"><%= l.linktext %></a>
+					☆ <a href="<%= l.link %>" id="link-text" target="_blank">
+						<%= l.linktext %>
+					</a>
 					<span id="small">(<%= l.subtext %>)</span>
-					
+
 					<% if (member._id.equals(user && user._id)) { %>
-						<span id="small"><a href="/member/<%= member._id %>/links/<%= l._id %>" class="small">EDIT</a></span>
-					<% } %>
-					</p>
-			<% }) %>
-		
-			<h3>SUBSCRIBE</h3>
-			<form action="/subs/<%= member._id %>" method="POST">
-				<input type="text" name="subEmail" placeholder="enter email" autocomplete="off">
-				<button type="submit">SUBMIT</button>
-			</form>
+						<span id="small"><a href="/member/<%= member._id %>/links/<%= l._id %>"
+								class="small">EDIT</a></span>
+						<% } %>
+				</p>
+				<% }) %>
+
+					<h3>SUBSCRIBE</h3>
+					<form action="/subs/<%= member._id %>" method="POST" class="vertical-form">
+						<input type="text" name="subEmail" placeholder="enter email" autocomplete="off">
+						<button type="submit">SUBMIT</button>
+					</form>
 		</div>
-		
+
 		<div class="pp-container">
 			<div class="x">x</div>
 			<img src="<%= member.photo %>" alt="<%= member.username %>" class="profile-pic">
@@ -41,38 +51,36 @@
 
 	<% if (member._id.equals(user && user._id)) { %>
 		<h3>MEMBER SETTINGS</h3>
-		<form action="/member/links" method="POST">
+		<form action="/member/links" method="POST" class="vertical-form">
 			<input type="text" name="linktext" placeholder="title" autocomplete="off">
 			<input type="text" name="link" placeholder="http://..." autocomplete="off">
 			<button type="submit">ADD NEW LINK</button>
 		</form>
 		<br>
-		<form action="/member/<%= member._id %>/update" method="POST">
+		<form action="/member/<%= member._id %>/update" method="POST" class="vertical-form">
 			<input type="text" name="username" value="<%= member.username %>" autocomplete="off">
 			<button type="submit">CHANGE USERNAME</button>
 		</form>
 		<br>
-		<form action="/member/<%= member._id %>/update" method="POST">
+		<form action="/member/<%= member._id %>/update" method="POST" class="vertical-form">
 			<input type="text" name="photo" value="<%= member.photo %>" autocomplete="off">
 			<button type="submit">CHANGE PROFILE PHOTO</button>
 		</form>
 		<br>
-		<form action="/member/<%= member._id %>/update" method="POST">
+		<form action="/member/<%= member._id %>/update" method="POST" class="vertical-form">
 			<input type="text" name="location" value="<%= member.location %>" autocomplete="off">
 			<button type="submit">CHANGE LOCATION</button>
 		</form>
 		<br>
 
 		<a href="/subs/<%= member._id %>">VIEW SUBSCRIBERS</a>
-		
+
 		<br><br>
 
-		<% if (user) { %>
+		<% if (member._id.equals(user && user._id)) { %>
 			<a href="/logout">LOGOUT</a>
-		<% } else { %>
-			<a href="/auth/google">LOGIN</a>
-		<% } %>
-	<% } %>
+			<% } %>
+				<% } %>
 </body>
 
 </html>
