@@ -28,7 +28,6 @@ p {
 .profile-container {
 	display: flex;
 	justify-content: space-between;
-	width: 70%;
 }
 
 .pp-container {
