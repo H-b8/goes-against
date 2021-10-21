@@ -23,7 +23,6 @@ const linkSchema = new mongoose.Schema({
 });
 
 const memberSchema = new mongoose.Schema({
-	name: String,
 	email: String,
 	googleId: String, 
 	username: {

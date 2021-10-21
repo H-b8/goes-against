@@ -8,6 +8,7 @@ passport.use(new GoogleStrategy({
     callbackURL: process.env.GOOGLE_CALLBACK
   },
   function(accessToken, refreshToken, profile, cb) {
+    console.log(profile)
     // a user has logged in with OAuth..
     Member.findOne({googleId: profile.id}, function(err, member) {
       if (err) return cb(err);
@@ -17,7 +18,6 @@ passport.use(new GoogleStrategy({
       } else {
         // we have a new student via OAuth!
         const newMember = new Member({
-          name: profile.displayName,
           email: profile.emails[0].value,
           googleId: profile.id
         });

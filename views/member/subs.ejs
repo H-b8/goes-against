@@ -20,6 +20,10 @@
 				<%= sub.subEmail %>
 			</form>
 		<% }) %>
+
+		<% if (subs.length === 0) { %>
+			<p>No subscribers yet! :^(</p>
+		<% } %>
 	<% } %>
 </body>
 
