@@ -8,8 +8,6 @@ Designed with comic relief in mind, this web application takes a minimalist appr
 
 ** Additional Notes: This app is built with a responsive design, specifically to be accessed through a social media link and viewed on a phone screen. "Zero cencorship" is stated as opposed to popular social media and link hosting websites who do not allow adult links.
 
-<img src="/public/images/GOESAGAINST.png" width="500">
-
 ### TECHNOLOGIES USED
 
 MongoDB Atlas, Mongoose, Express, Node.JS, EJS, HTML, CSS, Vanilla JavaScript, Heroku, Notion
