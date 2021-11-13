@@ -1,9 +1,12 @@
 const router = require('express').Router();
 const memberCtrl = require('../controllers/member');
 
-router.get('/:id', memberCtrl.profile);
-router.post('/:id/update', isLoggedIn, memberCtrl.editMember);
+// MEMBER PROFILE READ + UPDATE
+router.get('/:memberId', memberCtrl.readOne);
+// router.post('/:id/update', isLoggedIn, memberCtrl.update);
+router.put('/:memberId', memberCtrl.update);
 
+// PROFILE LINKS CRUD
 router.post('/links', isLoggedIn, memberCtrl.addLink);
 router.get('/:mid/links/:lid', isLoggedIn, memberCtrl.showLink);
 router.post('/:mid/links/:lid/update', isLoggedIn, memberCtrl.editLink);

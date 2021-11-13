@@ -15,7 +15,6 @@ passport.use(new GoogleStrategy({
         // returning user
         return cb(null, member);
       } else {
-        // we have a new student via OAuth!
         const newMember = new Member({
           email: profile.emails[0].value,
           googleId: profile.id

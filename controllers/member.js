@@ -2,8 +2,8 @@ const Member = require('../models/member');
 const Subscriber = require('../models/subscriber');
 
 module.exports = {
-	profile,
-	editMember,
+	readOne: memberProfile,
+	update: updateMember,
 	addLink,
 	showLink,
 	editLink,
@@ -11,23 +11,47 @@ module.exports = {
 };
 
 // SHOW PROFILE
-function profile(req, res, next) {
-	Member.findById(req.params.id, function (err, member) {
-		if (err) return next(err);
-		res.render('member/profile', {
-			member,
-			user: req.user
-		});
-	});
-}
+async function memberProfile(req, res) {
+	// Member.findById(req.params.id, function (err, member) {
+	// 	if (err) return next(err);
+	// 	res.render('member/profile', {
+	// 		member,
+	// 		user: req.user
+	// 	});
+	// });
+
+	try {
+		const member = await Member.findById(req.params.memberId);
+		res.status(200).json(member);
+	} catch (err) {
+		res.status(404).send('404: USER NOT FOUND');
+	}
+};
 
 // EDIT PROFILE
-function editMember(req, res) {
+async function updateMember(req, res) {
 	// if username being updated look for username
 	// if already exists, send error
-	Member.findByIdAndUpdate(req.params.id, req.body, function (err) {
-		res.redirect(`/member/${req.params.id}`);
-	});
+
+	try {
+		const existingUser = await Member.findOne({ username: req.body.username });
+
+		if (req.body.username && !existingUser) {
+			console.log(req.body.username, " available");
+		} else if (req.body.username && existingUser) {
+			console.log(req.body.username, " unavailable");
+		}
+
+		const updatedUser = await Member.findById(req.params.id)
+
+		res.status(200).json(updatedUser);
+	} catch (err) {
+		res.status(500).send('500: ERROR UPDATING MEMBER PROFILE');
+	}
+
+	// Member.findByIdAndUpdate(req.params.id, req.body, function (err) {
+	// 	res.redirect(`/member/${req.params.id}`);
+	// });
 };
 
 function addLink(req, res, next) {
