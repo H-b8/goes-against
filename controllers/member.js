@@ -2,49 +2,43 @@ const Member = require('../models/member');
 const Subscriber = require('../models/subscriber');
 
 module.exports = {
-	readOne: memberProfile,
-	update: updateMember,
-	addLink,
-	showLink,
-	editLink,
-	delLink
+	readMember,
+	updateMember,
+	createLink,
+	updateLink,
+	deleteLink
 };
 
-// SHOW PROFILE
-async function memberProfile(req, res) {
-	// Member.findById(req.params.id, function (err, member) {
-	// 	if (err) return next(err);
-	// 	res.render('member/profile', {
-	// 		member,
-	// 		user: req.user
-	// 	});
-	// });
+// READ ONE MEMBER
+async function readMember(req, res) {
+	Member.findById(req.params.memberId, function (err, member) {
+		if (err) return next(err);
+		res.render('member/profile', {
+			member,
+			user: req.user
+		});
+	});
 
-	try {
-		const member = await Member.findById(req.params.memberId);
-		res.status(200).json(member);
-	} catch (err) {
-		res.status(404).send('404: USER NOT FOUND');
-	}
+	// try {
+	// 	const member = await Member.findById(req.params.memberId);
+	// 	res.status(200).json(member);
+	// } catch (err) {
+	// 	res.status(404).send('404: USER NOT FOUND');
+	// }
 };
 
-// EDIT PROFILE
+// UPDATE MEMBER
 async function updateMember(req, res) {
-	// if username being updated look for username
-	// if already exists, send error
-
 	try {
 		const existingUser = await Member.findOne({ username: req.body.username });
 
-		if (req.body.username && !existingUser) {
-			console.log(req.body.username, " available");
+		if (!req.body.username || (req.body.username && !existingUser)) {
+			await Member.findByIdAndUpdate(req.params.memberId, req.body);
+			const updatedUser = Member.findById(req.params.memberId);
+			res.status(200).json(updatedUser);
 		} else if (req.body.username && existingUser) {
-			console.log(req.body.username, " unavailable");
+			res.send('USERNAME TAKEN');
 		}
-
-		const updatedUser = await Member.findById(req.params.id)
-
-		res.status(200).json(updatedUser);
 	} catch (err) {
 		res.status(500).send('500: ERROR UPDATING MEMBER PROFILE');
 	}
@@ -54,32 +48,24 @@ async function updateMember(req, res) {
 	// });
 };
 
-function addLink(req, res, next) {
-	req.user.links.push(req.body);
-	req.user.save(function (err) {
-		res.redirect(`/member/${req.user._id}`);
-	});
-}
+// CREATE LINK
+async function createLink(req, res) {
+	try {
+		await req.user.links.push(req.body);
+		await req.user.save();
+		const user = await Member.findById(req.user._id);
+		res.status(200).json(user);
+	} catch (err) {
+		res.status(500).send('500: ERROR ADDING NEW LINK');
+	}
 
-// ?????
-function showLink(req, res) {
-	Member.findOne({ 'links._id': req.params.lid }, function (err, member) {
-		const linkIdFromParams = req.params.lid;
-		let link;
-		member.links.forEach((linkFromDatabase) => {
-			if (linkFromDatabase._id == linkIdFromParams) {
-				link = linkFromDatabase
-			}
-		})
-		res.render('member/link', {
-			member,
-			user: req.user,
-			link
-		})
-	});
-}
+	// req.user.save(function (err) {
+	// 	res.redirect(`/member/${req.user._id}`);
+	// });
+};
 
-function editLink(req, res) {
+// UPDATE LINK
+async function updateLink(req, res) {
 	Member.findById(req.params.mid, function (err, member) {
 		const newLink = member.links.id(req.params.lid)
 		for (let prop in req.body) {
@@ -91,7 +77,7 @@ function editLink(req, res) {
 	})
 }
 
-function delLink(req, res, next) {
+function deleteLink(req, res, next) {
 	Member.findById(req.params.mid, function (err, member) {
 		let x = member.links.id(req.params.lid)
 		x.remove();

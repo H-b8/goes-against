@@ -2,19 +2,17 @@ const router = require('express').Router();
 const memberCtrl = require('../controllers/member');
 
 // MEMBER PROFILE READ + UPDATE
-router.get('/:memberId', memberCtrl.readOne);
-// router.post('/:id/update', isLoggedIn, memberCtrl.update);
-router.put('/:memberId', memberCtrl.update);
+router.get('/:memberId', memberCtrl.readMember); 
+router.post('/:memberId/update', isLoggedIn, memberCtrl.updateMember); // POST REQ BC EJS IS WEIRD
 
 // PROFILE LINKS CRUD
-router.post('/links', isLoggedIn, memberCtrl.addLink);
-router.get('/:mid/links/:lid', isLoggedIn, memberCtrl.showLink);
-router.post('/:mid/links/:lid/update', isLoggedIn, memberCtrl.editLink);
-router.delete('/:mid/links/:lid', isLoggedIn, memberCtrl.delLink);
+router.post('/links', isLoggedIn, memberCtrl.createLink);
+router.post('/:mid/links/:lid/update', isLoggedIn, memberCtrl.updateLink);
+router.delete('/:mid/links/:lid', isLoggedIn, memberCtrl.deleteLink);
 
 function isLoggedIn(req, res, next) {
   if ( req.isAuthenticated() ) return next();
   res.redirect('/auth/google');
-}
+};
 
 module.exports = router;
