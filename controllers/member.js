@@ -5,6 +5,7 @@ module.exports = {
 	readMember,
 	updateMember,
 	createLink,
+	readLink,
 	updateLink,
 	deleteLink
 };
@@ -52,8 +53,8 @@ async function updateMember(req, res) {
 async function createLink(req, res) {
 	try {
 		await req.user.links.push(req.body);
-		await req.user.save();
-		const user = await Member.findById(req.user._id);
+		// const user = await Member.findById(req.user._id);
+		const user = await req.user;
 		res.status(200).json(user);
 	} catch (err) {
 		res.status(500).send('500: ERROR ADDING NEW LINK');
@@ -64,17 +65,46 @@ async function createLink(req, res) {
 	// });
 };
 
+// SHOW EDIT LINK PAGE
+async function readLink(req, res) {
+	Member.findOne({ 'links._id': req.params.linkId }, function (err, member) {
+		const linkIdFromParams = req.params.linkId;
+		let link;
+
+		member.links.forEach((linkFromDatabase) => {
+			if (linkFromDatabase._id == linkIdFromParams) {
+				link = linkFromDatabase
+			}
+		})
+
+		res.render('member/link', {
+			member,
+			user: req.user,
+			link
+		})
+	});
+}
+
 // UPDATE LINK
 async function updateLink(req, res) {
-	Member.findById(req.params.mid, function (err, member) {
-		const newLink = member.links.id(req.params.lid)
-		for (let prop in req.body) {
-			newLink[prop] = req.body[prop]
-		}
-		member.save(function (err) {
-			res.redirect(`/member/${req.params.mid}`);
-		})
-	})
+	// Member.findById(req.params.mid, function (err, member) {
+	// 	const newLink = member.links.id(req.params.lid)
+	// 	for (let prop in req.body) {
+	// 		newLink[prop] = req.body[prop]
+	// 	}
+	// 	member.save(function (err) {
+	// 		res.redirect(`/member/${req.params.mid}`);
+	// 	})
+	// })
+
+	try {
+		const member = await req.user;
+		const updatedLink = await member.links.id(req.params.linkId);
+		for (let prop in req.body) updatedLink[prop] = await req.body[prop];
+		res.status(200).json(member);
+	} catch (err) {
+		res.status(500).send('500: ERROR UPDATING LINK');
+	}
 }
 
 function deleteLink(req, res, next) {
